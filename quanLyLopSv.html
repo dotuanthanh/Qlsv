@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class</title>
+</head>
+<body>
+<p id="display"></p>
+</body>
+</html>
+<script>
+    function SinhVien(msv, hoten, toan, ly, hoa) {
+        this.msv = msv;
+        this.hoten = hoten;
+        this.toan = toan;
+        this.ly = ly;
+        this.hoa = hoa;
+        this.dtb = (toan + ly + hoa) / 3;
+        this.show = function () {
+            return "Ma sinh vien " + this.msv + 'Ho ten ' + this.hoten + 'Diem Tb' + this.dtb
+        }
+    }
+
+    function QLSV() {
+        this.dssv = [new SinhVien(1, 'Phuong', 2, 3, 4), new SinhVien(2, 'Tiep', 4, 6, 7), new SinhVien(3, 'Thien', 6, 6, 8),];
+        this.del = function (msv) {
+            for (i = 0; i < this.dssv.length; i++) {
+                if (msv == this.dssv[i].msv) {
+                    return this.dssv.splice(i, 1)
+                }
+            }
+        }
+        this.show = function () {
+            str = ''
+            for (i = 0; i < this.dssv.length; i++) {
+                str += this.dssv[i].show() +'<br>'
+            }
+            return str;
+        }
+        this.Sapxep = function () {
+            for (i = 0; i < this.dssv.length - 1; i++)
+                for (j = 0; j < this.dssv.length - i - 1; j++) {
+                    if (this.dssv[j].dtb < this.dssv[j + 1].dtb) {
+                        let gianTiep = this.dssv[j];
+                        this.dssv[j] = this.dssv[j + 1];
+                        this.dssv[j + 1] = gianTiep;
+                    }
+                }
+        }
+    }
+   let qlsv=new  QLSV()
+    qlsv.Sapxep()
+    document.getElementById('display').innerHTML=qlsv.show()
+
+</script>
